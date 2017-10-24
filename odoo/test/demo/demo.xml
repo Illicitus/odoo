@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="object0" model="test.test">
+            <field name="test_name">Object 0</field>
+            <field name="test_purpose">For test</field>
+        </record>
+
+        <record id="object1" model="test_session.test">
+            <field name="test">Object 2</field>
+            <field name="start_date"/>
+            <field name="end_date"/>
+        </record>
+
+    </data>
+</odoo>

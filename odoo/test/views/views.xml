@@ -1,0 +1,52 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="partners_form_view">
+            <field name="name">respartners.form</field>
+            <field name="model">res.partners</field>
+            <field name="arch" type="xml">
+                <form string="Partners Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="is_tested" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tests">
+            <field name="name">Test</field>
+            <field name="res_model">test.test</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="tests">
+            <field name="name">Test</field>
+            <field name="res_model">test.test</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="test_sessions">
+            <field name="name">Test Sessions</field>
+            <field name="res_model">test_session.test</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_test_menu" name="Test"/>
+
+        <menuitem id="test_menu" name="Test"
+                  parent="main_test_menu"/>
+
+        <menuitem id="tests_menu" name="Tests" parent="test_menu"
+                  action="tests"/>
+        <menuitem id="test_sessions_menu" name="Test sessions" parent="test_menu"
+                  action="test_sessions"/>
+    </data>
+</odoo>
