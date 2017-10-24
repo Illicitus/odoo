@@ -4,7 +4,7 @@ from odoo import models, fields, api
 
 
 class ResPartners(models.Model):
-    _inherit = 'res.partners'
+    _name = 'res.partners'
 
     name = fields.Char()
     is_tested = fields.Boolean()
