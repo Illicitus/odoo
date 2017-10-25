@@ -1,45 +1,102 @@
 <odoo>
     <data>
 
-        <record model="ir.ui.view" id="partners_form_view">
-            <field name="name">respartners.form</field>
-            <field name="model">res.partners</field>
-            <field name="arch" type="xml">
-                <form string="Partners Form">
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="is_tested" readonly="1"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+        <!--<record model="ir.ui.view" id="res_partners_form_view">-->
+            <!--<field name="name">res.partners.form.view</field>-->
+            <!--<field name="model">res.partners</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<form string="Partners Form">-->
+                    <!--<sheet>-->
+                        <!--<group>-->
+                            <!--<field name="name"/>-->
+                            <!--<field name="is_tested" readonly="1"/>-->
+                        <!--</group>-->
+                    <!--</sheet>-->
+                    <!--<search string="POS">-->
+                        <!--<group expand="0" string="Group By...">-->
+                            <!--<filter name="group_ladder" string="Ladder" domain="[]" context="{'group_by': 'name'}" />-->
+                        <!--</group>-->
+                    <!--</search>-->
+                <!--</form>-->
+            <!--</field>-->
+        <!--</record>-->
+        <!-- trees block -->
 
-        <record model="ir.actions.act_window" id="tests">
-            <field name="name">Test</field>
-            <field name="res_model">test.test</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+            <!--tests tree-->
+            <record model="ir.ui.view" id="test_tree">
+                <field name="name">Tests list</field>
+                <field name="model">test.test</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Tests list">
+                        <field name="test_name"/>
+                        <field name="test_purpose"/>
+                        <field name="tester" />
+                    </tree>
+                </field>
+            </record>
+
+            <!--test sessions tree-->
+            <record model="ir.ui.view" id="test_sessions_tree">
+                <field name="name">Test Sessions list</field>
+                <field name="model">test_session.test</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Test sessions list">
+                        <field name="test"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="duration"/>
+                    </tree>
+                </field>
+            </record>
+
+        <!-- trees block -->
+
+        <!-- search block -->
+        <!-- search block -->
+
+        <!-- form block -->
+        <!-- form block -->
+
+        <!-- actions block -->
+
+            <!-- tests action -->
+            <record model="ir.actions.act_window" id="tests">
+                <field name="name">Test</field>
+                <field name="res_model">test.test</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="test_tree"/>
+            </record>
+
+            <!-- test_sessions action -->
+            <record model="ir.actions.act_window" id="test_sessions">
+                <field name="name">Test Sessions</field>
+                <field name="res_model">test_session.test</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="test_sessions_tree"/>
+            </record>
+
+        <!-- actions block -->
 
 
-        <record model="ir.actions.act_window" id="test_sessions">
-            <field name="name">Test Sessions</field>
-            <field name="res_model">test_session.test</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
+        <!-- menu block -->
 
-        <!-- top level menu: no parent -->
-        <menuitem id="main_test_menu" name="Test"/>
+            <!-- top menu -->
+            <menuitem id="main_test_menu" name="Test"/>
 
-        <menuitem id="test_menu" name="Test"
-                  parent="main_test_menu"/>
+            <!-- children -->
+            <menuitem id="test_menu" name="Test"
+                      parent="main_test_menu"/>
 
-        <menuitem id="tests_menu" name="Tests" parent="test_menu"
-                  action="tests"/>
-        <menuitem id="test_sessions_menu" name="Test sessions" parent="test_menu"
-                  action="test_sessions"/>
+            <menuitem id="tests_menu" name="Tests" parent="test_menu"
+                      action="tests"/>
+            <menuitem id="test_sessions_menu" name="Test sessions" parent="test_menu"
+                      action="test_sessions"/>
+
+        <!-- menu block -->
+
     </data>
 </odoo>
