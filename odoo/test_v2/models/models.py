@@ -7,14 +7,7 @@ class ResPartners(models.Model):
     _name = 'res.partners'
 
     name = fields.Char()
-    is_tested = fields.Boolean(default=False, compute='check_is_tested')
-
-    @api.depends('name')
-    def check_is_tested(self):
-        # If partner name already have relation with test, field is_tested will be True.
-
-        if self.env['res.partners'].search([('name', '=', '{0}'.format(self.name))]):
-            self.is_tested = True
+    is_tested = fields.Boolean()
 
 
 class Test(models.Model):
@@ -39,8 +32,9 @@ class TestSession(models.Model):
 
         for record in self:
             if not (record.start_date and record.end_date):
-                continue
+                    continue
 
             start_date = fields.Datetime.from_string(record.start_date)
             end_date = fields.Datetime.from_string(record.end_date)
             record.duration = (end_date - start_date).days + 1
+

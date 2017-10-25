@@ -23,13 +23,6 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <record model="ir.actions.act_window" id="tests">
-            <field name="name">Test</field>
-            <field name="res_model">test.test</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-
 
         <record model="ir.actions.act_window" id="test_sessions">
             <field name="name">Test Sessions</field>
