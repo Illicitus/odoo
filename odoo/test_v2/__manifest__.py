@@ -1,22 +1,25 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "test",
+    'name': "Test task",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Just test task""",
 
     'description': """
-        Long description of module's purpose
+        - add tests
+        - add test sessions
+        - add form view res.partners
+        - add active field is_tested
+        - add filter to res.partners view 
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "Honchar Vitalii",
+    'website': "",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Uncategorized',
+    'category': 'Test task',
     'version': '0.1',
 
     # any module necessary for this one to work correctly

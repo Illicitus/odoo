@@ -8,8 +8,9 @@ class ResPartners(models.Model):
 
     name = fields.Char()
     is_tested = fields.Boolean(default=False, compute='check_is_tested')
+    test_session = fields.One2many('test_session.test', 'test')
 
-    @ api.depends('name')
+    @api.depends('name')
     def check_is_tested(self):
         # If partner name already have relation with test, field is_tested will be True.
 

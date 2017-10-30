@@ -1,25 +1,6 @@
 <odoo>
     <data>
 
-        <!--<record model="ir.ui.view" id="res_partners_form_view">-->
-            <!--<field name="name">res.partners.form.view</field>-->
-            <!--<field name="model">res.partners</field>-->
-            <!--<field name="arch" type="xml">-->
-                <!--<form string="Partners Form">-->
-                    <!--<sheet>-->
-                        <!--<group>-->
-                            <!--<field name="name"/>-->
-                            <!--<field name="is_tested" readonly="1"/>-->
-                        <!--</group>-->
-                    <!--</sheet>-->
-                    <!--<search string="POS">-->
-                        <!--<group expand="0" string="Group By...">-->
-                            <!--<filter name="group_ladder" string="Ladder" domain="[]" context="{'group_by': 'name'}" />-->
-                        <!--</group>-->
-                    <!--</search>-->
-                <!--</form>-->
-            <!--</field>-->
-        <!--</record>-->
         <!-- trees block -->
 
             <!--tests tree-->
@@ -51,13 +32,44 @@
                 </field>
             </record>
 
+            <!-- partner tree-->
+            <record model="ir.ui.view" id="partner_tree">
+                <field name="name">Partner list</field>
+                <field name="model">res.partner</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Partner list">
+                        <field name="name"/>
+                        <field name="id"/>
+                    </tree>
+                </field>
+            </record>
+
         <!-- trees block -->
 
         <!-- search block -->
-        <!-- search block -->
 
-        <!-- form block -->
-        <!-- form block -->
+            <!-- partner search and filter -->
+            <record id="partners_search_and_filters" model="ir.ui.view">
+                <field name="name">Partners</field>
+                <field name="model">res.partners</field>
+                <field name="arch" type="xml">
+                    <search string="Time filter">
+                        <field name="name"/>
+                        <filter name="name" string="Tests in the next 30 days"
+                                domain="[
+                                '|', '&amp;',
+                                ('test_session.start_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                ('test_session.start_date', '&lt;=', (context_today() + datetime.timedelta(30)).strftime('%Y-%m-%d')),
+                                '&amp;',
+                                ('test_session.end_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                                ('test_session.end_date', '&lt;=', (context_today() + datetime.timedelta(30)).strftime('%Y-%m-%d'))
+                                ]"/>
+                    </search>
+                </field>
+            </record>
+
+        <!-- search block -->
 
         <!-- actions block -->
 
@@ -79,22 +91,35 @@
                 <field name="view_id" ref="test_sessions_tree"/>
             </record>
 
-        <!-- actions block -->
+            <!-- partner action -->
+            <record model="ir.actions.act_window" id="partners">
+                <field name="name">Partner</field>
+                <field name="res_model">res.partners</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="partner_tree"/>
+            </record>
 
+        <!-- actions block -->
 
         <!-- menu block -->
 
-            <!-- top menu -->
+            <!-- nav bar menu -->
             <menuitem id="main_test_menu" name="Test"/>
 
-            <!-- children -->
+            <!-- top menu -->
             <menuitem id="test_menu" name="Test"
                       parent="main_test_menu"/>
+            <menuitem id="partner_menu" name="Partner"
+                      parent="main_test_menu"/>
 
+            <!-- children -->
             <menuitem id="tests_menu" name="Tests" parent="test_menu"
                       action="tests"/>
             <menuitem id="test_sessions_menu" name="Test sessions" parent="test_menu"
                       action="test_sessions"/>
+            <menuitem id="partners_menu" name="Partners" parent="partner_menu"
+                      action="partners"/>
 
         <!-- menu block -->
 
